@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+
+// Color variables
+:root {
+  --backgroundColor: antiquewhite;
+  --textColor: #00003f;
+  --inputColor: white;
+  --sideBarColor: bisque;
+  --scrollbarColor: burlywood;
+  --myMessageColor: #deb887;
+  --otherMessageColor: bisque;
+  --joinButtonBackgroundColor: seagreen;
+  --joinButtonTextColor: white;
+  --userTagColor: #e9967a;
+  --SVGColorFilter: brightness(0) saturate(100%) invert(83%) sepia(31%)
+    saturate(539%) hue-rotate(336deg) brightness(92%) contrast(89%);
+  --SVGSendColorFilter: brightness(0) saturate(100%) invert(67%) sepia(18%)
+    saturate(1039%) hue-rotate(328deg) brightness(97%) contrast(88%);
+}
+// Dark theme colors
+.dark-theme {
+  --backgroundColor: #292f3f;
+  --textColor: #ffffff;
+  --inputColor: rgba(0, 0, 0, 0.25);
+  --sideBarColor: #373e4e;
+  --scrollbarColor: #272a35;
+  --myMessageColor: #272a35;
+  --otherMessageColor: #373e4e;
+  --joinButtonBackgroundColor: seagreen;
+  --joinButtonTextColor: white;
+  --userTagColor: rgba(0, 0, 0, 0.7);
+  --SVGColorFilter: brightness(0) saturate(100%) invert(100%) sepia(100%)
+    saturate(14%) hue-rotate(212deg) brightness(104%) contrast(104%);
+  --SVGSendColorFilter: brightness(0) saturate(100%) invert(100%) sepia(100%)
+    saturate(14%) hue-rotate(212deg) brightness(104%) contrast(104%);
+}
+
+// Theme Button
+.theme-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    font-weight: 700;
+  }
+  .theme-btn {
+    width: 100%;
+    max-width: 65px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    margin: 0;
+    border-radius: 80px;
+    border: 0;
+    background-color: var(--inputColor);
+    .icon-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+
+      &::before {
+        content: "";
+        background-color: var(--otherMessageColor);
+        position: absolute;
+        top: 50%;
+        left: -3px;
+        transform: translateY(-50%);
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        transition: left 0.5s ease-in-out;
+      }
+    }
+    img {
+      width: 18px;
+      filter: var(--SVGColorFilter);
+    }
+
+    &.dark-theme {
+      .icon-container {
+        &::before {
+          left: 27px;
+        }
+      }
+    }
+  }
+}
+
+// General Styles
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: var(--textColor);
+
+  transition: all 0.5s ease-in-out;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  height: 100%;
+
+  background-color: var(--backgroundColor);
+
+  // Login Page
+  .loginPage {
+    position: absolute;
+    inset: 0;
+    background-color: var(--backgroundColor);
+
+    z-index: 15;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &.hide {
+      display: none;
+    }
+
+    p {
+      margin-bottom: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+    }
+    input {
+      height: 42px;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 0 16px;
+      font-size: 16px;
+      outline: 0;
+      border: 0;
+      border-radius: 10px;
+      background-color: var(--inputColor);
+    }
+    button {
+      height: 42px;
+      width: 100%;
+
+      font-size: 16px;
+      outline: 0;
+      border: 0;
+      border-radius: 10px;
+      background-color: var(--joinButtonBackgroundColor);
+      color: var(--joinButtonTextColor);
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+  }
+  // Overlay
+  .overlay {
+    display: none;
+    @media screen and (max-width: 640px) {
+      background-color: transparent;
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+
+      &.show {
+        display: block;
+      }
+    }
+  }
+  // Side bar
+  .sideBar {
+    width: 100%;
+    max-width: 250px;
+    padding: 15px;
+
+    background-color: var(--sideBarColor);
+
+    display: flex;
+    flex-direction: column;
+
+    // Open side bar btn
+    .open-sideBarBtn {
+      display: none;
+    }
+
+    @media screen and (max-width: 640px) {
+      transition: left 0.5s ease-in-out;
+      position: fixed;
+      height: 100%;
+      z-index: 10;
+      left: -250px;
+      max-width: 250px;
+      width: 250px;
+
+      &.show {
+        left: 0px;
+      }
+
+      // side bar toggle btn
+
+      .open-sideBarBtn {
+        position: absolute;
+        right: -25px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+        width: 25px;
+        font-size: 12px;
+        border: 0;
+        background-color: var(--backgroundColor);
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        &.open {
+          img {
+            transform: rotate(180deg);
+          }
+        }
+
+        img {
+          max-width: 20px;
+          height: 20px;
+          filter: var(--SVGColorFilter);
+          transition: transform 0.5s ease-in-out;
+        }
+      }
+    }
+    h2 {
+      font-size: 16px;
+    }
+    h3 {
+      font-size: 14px;
+      margin: 14px 0 0;
+    }
+    ul {
+      list-style: none;
+      flex: 1;
+
+      li {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        &.me {
+          &::after {
+            content: "(você)";
+            color: var(--userTagColor);
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+  .chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 15px 15px 30px;
+
+    .messagesContainer {
+      flex: 1;
+    }
+
+    // Tag
+    .tag {
+      width: fit-content;
+      margin: 0 auto;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    // Messages
+
+    .messagesContainer {
+      overflow: hidden auto;
+      padding-right: 10px;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbarColor);
+        border-radius: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      .messageWrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+
+        .message {
+          width: fit-content;
+          padding: 8px 10px;
+          border-radius: 10px;
+          position: relative;
+          min-width: 150px;
+
+          .username {
+            font-weight: 700;
+            font-size: 10px;
+          }
+          .text {
+            font-size: 14px;
+          }
+          .timeStamp {
+            font-size: 10px;
+            font-weight: 300;
+            position: absolute;
+            bottom: -16px;
+            right: 10px;
+          }
+        }
+
+        &.myMessage {
+          justify-content: end;
+          .message {
+            background-color: var(--myMessageColor);
+          }
+        }
+
+        &.otherMessage {
+          .message {
+            background-color: var(--otherMessageColor);
+          }
+        }
+      }
+    }
+
+    // Form
+
+    form {
+      display: flex;
+      position: relative;
+      textarea {
+        width: 100%;
+        border-radius: 10px;
+        border: 0;
+        outline: 0;
+        background-color: var(--inputColor);
+        resize: none;
+        padding: 8px 24px 8px 8px;
+      }
+      button {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        bottom: 5px;
+        right: 10px;
+        cursor: pointer;
+        border: 0;
+        margin: 0;
+        padding: 5px;
+        background-color: transparent;
+        width: 30px;
+        height: 30px;
+        img {
+          width: 15px;
+          height: 15px;
+          filter: var(--SVGSendColorFilter);
+        }
+      }
+    }
+  }
+}

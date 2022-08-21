@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="socket.io/socket.io.js" defer></script>
+    <script type="module" src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="loginPage">
+        <p>Digite seu nome para entrar no chat</p>
+        <form class="loginForm">
+          <input class="nameInput" type="text" />
+          <button>Entrar</button>
+        </form>
+      </div>
+      <!-- Overlay -->
+      <div class="overlay"></div>
+      <!-- Side Bar -->
+      <div class="sideBar">
+        <button class="open-sideBarBtn">
+          <img src="./angle-right-solid.svg" alt="" />
+        </button>
+        <h2>Chat Up</h2>
+        <h3>Online</h3>
+        <ul>
+          <!-- Users Online -->
+          <!-- <li>Carolina</li> -->
+        </ul>
+
+        <div class="theme-btn-container">
+          <span>Tema:</span>
+          <button class="theme-btn">
+            <div class="icon-container">
+              <img src="./sun-solid.svg" alt="" />
+              <img src="./moon-solid.svg" alt="" />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat">
+        <div class="messagesContainer">
+          <!-- myMessage -->
+          <!-- <div class="messageWrapper myMessage">
+            <div class="message">
+              <p class="username">username</p>
+              <p class="text">Message</p>
+              <span class="timeStamp">15:03</span>
+            </div>
+          </div> -->
+          <!-- otherMessage -->
+          <!-- <div class="messageWrapper otherMessage">
+            <div class="message">
+              <p class="username">username</p>
+              <p class="text">Other Message</p>
+              <span class="timeStamp">15:06</span>
+            </div>
+          </div> -->
+        </div>
+
+        <form class="form">
+          <textarea cols="30" rows="3"></textarea>
+          <button title="send" type="submit">
+            <img src="./paper-plane-solid.svg" alt="" />
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
